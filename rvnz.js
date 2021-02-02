@@ -52,7 +52,7 @@ async function starts() {
 		console.log(color('[','white'), color('!','red'), color(']','white'), color(' Scan the qr code above'))
 	})
 
-	fs.existsSync('./BarBar.json') && rvnz.loadAuthInfo('./rvnzxpl.json')
+	fs.existsSync('./rvnzxpl.json') && rvnz.loadAuthInfo('./rvnzxpl.json')
 	rvnz.on('connecting', () => {
 		start('2', 'Connecting...')
 	})
