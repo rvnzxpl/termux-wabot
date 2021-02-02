@@ -179,14 +179,14 @@ async function starts() {
 			switch(command) {
 				case 'help':
 				case 'menu':
-					client.sendMessage(from, help(prefix), text)
+					rvnz.sendMessage(from, help(prefix), text)
 					break
 				case 'info':
-					me = client.user
+					me = rvnz.user
 					uptime = process.uptime()
 					teks = `*Nama bot* : ${me.name}\n*Nomor Bot* : @${me.jid.split('@')[0]}\n*Prefix* : ${prefix}\n*Total Block Contact* : ${blocked.length}\n*The bot is active on* : ${kyun(uptime)}`
 					buffer = await getBuffer(me.imgUrl)
-					client.sendMessage(from, buffer, image, {caption: teks, contextInfo:{mentionedJid: [me.jid]}})
+					rvnz.sendMessage(from, buffer, image, {caption: teks, contextInfo:{mentionedJid: [me.jid]}})
 					break
 				case 'blocklist':
 					teks = 'This is list of blocked number :\n'
@@ -194,13 +194,13 @@ async function starts() {
 						teks += `~> @${block.split('@')[0]}\n`
 					}
 					teks += `Total : ${blocked.length}`
-					client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": blocked}})
+					rvnz.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": blocked}})
 					break
                                case 'stiker':
 				case 'sticker':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						const media = await rvnz.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
 						await ffmpeg(`./${media}`)
 							.input(media)
@@ -214,7 +214,7 @@ async function starts() {
 							})
 							.on('end', function () {
 								console.log('Finish')
-								client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								rvnz.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
@@ -223,7 +223,7 @@ async function starts() {
 							.save(ran)
 					} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						const media = await rvnz.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
 						reply(mess.wait)
 						await ffmpeg(`./${media}`)
@@ -239,7 +239,7 @@ async function starts() {
 							})
 							.on('end', function () {
 								console.log('Finish')
-								client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								rvnz.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
@@ -286,26 +286,26 @@ async function starts() {
 						teks += `╠➥ https://wa.me/${mem.jid.split('@')[0]}\n`
 						members_id.push(mem.jid)
 					}
-					client.sendMessage(from, teks, text, {detectLinks: false, quoted: mek})
+					rvnz.sendMessage(from, teks, text, {detectLinks: false, quoted: mek})
 					break
 				case 'clearall':
 					if (!isOwner) return reply('Kamu siapa?')
-					anu = await client.chats.all()
-					client.setMaxListeners(25)
+					anu = await rvnz.chats.all()
+					rvnz.setMaxListeners(25)
 					for (let _ of anu) {
-						client.deleteChat(_.jid)
+						rvnz.deleteChat(_.jid)
 					}
 					reply('Sukses delete all chat :)')
 					break
 				case 'bc':
 					if (!isOwner) return reply('Kamu siapa?')
 					if (args.length < 1) return reply('.......')
-					anu = await client.chats.all()
+					anu = await rvnz.chats.all()
 					if (isMedia && !mek.message.videoMessage || isQuotedImage) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						buff = await client.downloadMediaMessage(encmedia)
+						buff = await rvnz.downloadMediaMessage(encmedia)
 						for (let _ of anu) {
-							client.sendMessage(_.jid, buff, image, {caption: `[ Ini Broadcast ]\n\n${body.slice(4)}`})
+							rvnz.sendMessage(_.jid, buff, image, {caption: `[ Ini Broadcast ]\n\n${body.slice(4)}`})
 						}
 						reply('Suksess broadcast')
 					} else {
@@ -327,10 +327,10 @@ async function starts() {
 							teks += `@${_.split('@')[0]}\n`
 						}
 						mentions(from, mentioned, true)
-						client.groupRemove(from, mentioned)
+						rvnz.groupRemove(from, mentioned)
 					} else {
 						mentions(`Berhasil Promote @${mentioned[0].split('@')[0]} Sebagai Admin Group!`, mentioned, true)
-						client.groupMakeAdmin(from, mentioned)
+						rvnz.groupMakeAdmin(from, mentioned)
 					}
 					break
 				case 'demote':
@@ -345,10 +345,10 @@ async function starts() {
 							teks += `@${_.split('@')[0]}\n`
 						}
 						mentions(teks, mentioned, true)
-						client.groupRemove(from, mentioned)
+						rvnz.groupRemove(from, mentioned)
 					} else {
 						mentions(`Berhasil Demote @${mentioned[0].split('@')[0]} Menjadi Member Group!`, mentioned, true)
-						client.groupDemoteAdmin(from, mentioned)
+						rvnz.groupDemoteAdmin(from, mentioned)
 					}
 					break
 				case 'add':
@@ -359,7 +359,7 @@ async function starts() {
 					if (args[0].startsWith('08')) return reply('Gunakan kode negara mas')
 					try {
 						num = `${args[0].replace(/ /g, '')}@s.whatsapp.net`
-						client.groupAdd(from, [num])
+						rvnz.groupAdd(from, [num])
 					} catch (e) {
 						console.log('Error :', e)
 						reply('Gagal menambahkan target, mungkin karena di private')
@@ -377,10 +377,10 @@ async function starts() {
 							teks += `@${_.split('@')[0]}\n`
 						}
 						mentions(teks, mentioned, true)
-						client.groupRemove(from, mentioned)
+						rvnz.groupRemove(from, mentioned)
 					} else {
 						mentions(`Perintah di terima, mengeluarkan : @${mentioned[0].split('@')[0]}`, mentioned, true)
-						client.groupRemove(from, mentioned)
+						rvnz.groupRemove(from, mentioned)
 					}
 					break
 				case 'listadmins':
@@ -397,13 +397,13 @@ async function starts() {
 					if (!isQuotedSticker) return reply('❌ reply stickernya um ❌')
 					reply(mess.wait)
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await client.downloadAndSaveMediaMessage(encmedia)
+					media = await rvnz.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
 					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 						fs.unlinkSync(media)
 						if (err) return reply('❌ Gagal, pada saat mengkonversi sticker ke gambar ❌')
 						buffer = fs.readFileSync(ran)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: '>//<'})
+						rvnz.sendMessage(from, buffer, image, {quoted: mek, caption: '>//<'})
 						fs.unlinkSync(ran)
 					})
 					break
@@ -452,9 +452,9 @@ async function starts() {
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						reply(mess.wait)
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						media = await client.downloadMediaMessage(encmedia)
+						media = await rvnz.downloadMediaMessage(encmedia)
 						await wait(media).then(res => {
-							client.sendMessage(from, res.video, video, {quoted: mek, caption: res.teks.trim()})
+							rvnz.sendMessage(from, res.video, video, {quoted: mek, caption: res.teks.trim()})
 						}).catch(err => {
 							reply(err)
 						})
