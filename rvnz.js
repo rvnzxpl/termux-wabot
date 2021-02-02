@@ -1,4 +1,4 @@
-//starts
+//starts test
 const {
     WAConnection,
     MessageType,
