@@ -136,7 +136,7 @@ async function starts() {
 				}
 			}
 
-			const botNumber = client.user.jid
+			const botNumber = rvnz.user.jid
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			const groupMetadata = isGroup ? await rvnz.groupMetadata(from) : ''
@@ -150,7 +150,7 @@ async function starts() {
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
-                        pushname = rvnz.contacts[sender] != undefined ? client.contacts[sender].vname || rvnz.contacts[sender].notify : undefined
+                        pushname = rvnz.contacts[sender] != undefined ? rvnz.contacts[sender].vname || rvnz.contacts[sender].notify : undefined
                         // owner number
 			const ownerNumber = ["6285892766102@s.whatsapp.net"] // replace this with your number
 
