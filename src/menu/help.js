@@ -31,10 +31,16 @@ const help = (pushname, prefix, botName, ownerName) => {
 ┠≽ ${prefix}simih 1/0
 ┠≽ ${prefix}welcome 1/0
 ╿
-┷┯ *〈 OTHER 〉*
+┷┯ *〈 OWNER 〉*
    ╽
-   ┠≽ ${prefix}wait
-   ╿ *${ownerName},*
-   ╰╼≽ *Developer © ${botName}*`
+   ┠≽ ${prefix}bc
+   ┠≽ ${prefix}setprefix
+   ┠≽ ${prefix}clearall
+   ╿
+┯┷ *〈 OTHER 〉*
+╽
+┠≽ ${prefix}wait
+╿ *${ownerName},*
+╰╼≽ *Developer © ${botName}*`
 }
 exports.help = help
