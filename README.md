@@ -141,6 +141,10 @@ Follow The Steps Below!
 
 ## Feature
 
+| Unique Feature | YES |
+|:--------------:|:---:|
+| Say Welcome To New Member|✅|
+
 | SimSimi | YES |
 |:-------:|:---:|
 | Simi|✅|
@@ -153,3 +157,27 @@ Follow The Steps Below!
 | Send Video or GIF with Caption|✅|
 | Reply A Sticker ( sticker to image )|✅|
 
+| Group | YES |
+|:-----:|:---:|
+| Tagall/Mentionall member|✅|
+| Tagall2/Mentionall member|✅|
+| Tagall3/Mentionall member|✅|
+| Add Member Group|✅|
+| Kick Member Group|✅|
+| Get List Admins Group|✅|
+
+| Owner Bot | YES |
+| Broadcast|✅|
+| Set Prefix|✅|
+| Clear All Chat|✅|
+
+---
+
+## Thanks To
+
+- [@adiwajshing/baileys](https://github.com/adiwajshing/baileys)
+- [MhankBarBar](https://github.com/mhankbarbar)
+
+<p align="center">
+    <img src="https://camo.githubusercontent.com/edcd2404e0e67f0e8a9a976dba7888012849724de18f81f3940cd7a8a286e8ca/68747470733a2f2f692e696d6775722e636f6d2f534f64426234522e676966">
+</p>
