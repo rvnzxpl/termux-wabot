@@ -167,6 +167,7 @@ Follow The Steps Below!
 | Get List Admins Group|✅|
 
 | Owner Bot | YES |
+|:---------:|:---:|
 | Broadcast|✅|
 | Set Prefix|✅|
 | Clear All Chat|✅|
